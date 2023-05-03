@@ -10511,19 +10511,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Zvonko\\.nuget\\packages\\": {}
+    "C:\\Users\\HOME\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Zvonko\\source\\repos\\agriculture\\Agrokultura\\Agrokultura.csproj",
+      "projectUniqueName": "C:\\Users\\HOME\\Desktop\\Agrokultura\\Agrokultura\\Agrokultura.csproj",
       "projectName": "Agrokultura",
-      "projectPath": "C:\\Users\\Zvonko\\source\\repos\\agriculture\\Agrokultura\\Agrokultura.csproj",
-      "packagesPath": "C:\\Users\\Zvonko\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Zvonko\\source\\repos\\agriculture\\Agrokultura\\obj\\",
+      "projectPath": "C:\\Users\\HOME\\Desktop\\Agrokultura\\Agrokultura\\Agrokultura.csproj",
+      "packagesPath": "C:\\Users\\HOME\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HOME\\Desktop\\Agrokultura\\Agrokultura\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Zvonko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HOME\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10593,7 +10593,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }
