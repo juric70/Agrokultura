@@ -48,8 +48,8 @@ namespace Agrokultura.Controllers
         // GET: Contracts/Create
         public IActionResult Create()
         {
-            ViewData["BeneficiaryId"] = new SelectList(_context.People, "Id", "Id");
-            ViewData["ProviderId"] = new SelectList(_context.People, "Id", "Id");
+            ViewData["BeneficiaryId"] = new SelectList(_context.People, "Id", "FullName");
+            ViewData["ProviderId"] = new SelectList(_context.People, "Id", "FullName");
             return View();
         }
 
@@ -60,8 +60,8 @@ namespace Agrokultura.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,ProviderId,BeneficiaryId,DateOfConclusion,DateOfExpiration")] Contract contract)
         {
-            ViewData["BeneficiaryId"] = new SelectList(_context.People, "Id", "Id", contract.BeneficiaryId);
-            ViewData["ProviderId"] = new SelectList(_context.People, "Id", "Id", contract.ProviderId);
+            ViewData["BeneficiaryId"] = new SelectList(_context.People, "Id", "FullName", contract.BeneficiaryId);
+            ViewData["ProviderId"] = new SelectList(_context.People, "Id", "FullName", contract.ProviderId);
     
             
                 _context.Add(contract);
@@ -83,8 +83,8 @@ namespace Agrokultura.Controllers
             {
                 return NotFound();
             }
-            ViewData["BeneficiaryId"] = new SelectList(_context.People, "Id", "Id", contract.BeneficiaryId);
-            ViewData["ProviderId"] = new SelectList(_context.People, "Id", "Id", contract.ProviderId);
+            ViewData["BeneficiaryId"] = new SelectList(_context.People, "Id", "FullName", contract.BeneficiaryId);
+            ViewData["ProviderId"] = new SelectList(_context.People, "Id", "FullName", contract.ProviderId);
             return View(contract);
         }
 
@@ -120,8 +120,8 @@ namespace Agrokultura.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BeneficiaryId"] = new SelectList(_context.People, "Id", "Id", contract.BeneficiaryId);
-            ViewData["ProviderId"] = new SelectList(_context.People, "Id", "Id", contract.ProviderId);
+            ViewData["BeneficiaryId"] = new SelectList(_context.People, "Id", "FullName", contract.BeneficiaryId);
+            ViewData["ProviderId"] = new SelectList(_context.People, "Id", "FullNmae", contract.ProviderId);
             return View(contract);
         }
 
