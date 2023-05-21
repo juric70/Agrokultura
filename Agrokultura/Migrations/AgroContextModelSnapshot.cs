@@ -130,12 +130,14 @@ namespace Agrokultura.Migrations
                         .HasColumnName("country_id");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .IsUnicode(false)
                         .HasColumnType("varchar(100)")
                         .HasColumnName("name");
 
                     b.Property<string>("PostalCode")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .IsUnicode(false)
                         .HasColumnType("varchar(20)")
@@ -474,6 +476,12 @@ namespace Agrokultura.Migrations
                         .HasColumnType("float")
                         .HasColumnName("amount_of_goods");
 
+                    b.Property<string>("Color")
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("color");
+
                     b.Property<string>("Description")
                         .HasMaxLength(5000)
                         .IsUnicode(false)
@@ -519,6 +527,49 @@ namespace Agrokultura.Migrations
                     b.HasIndex("PlantTypeId");
 
                     b.ToTable("plant", (string)null);
+                });
+
+            modelBuilder.Entity("Agrokultura.Models.PlantPassport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CertificateNumber")
+                        .HasMaxLength(256)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(256)")
+                        .HasColumnName("certificate_number");
+
+                    b.Property<string>("CountryOfOrigin")
+                        .HasMaxLength(256)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(256)")
+                        .HasColumnName("country_of_origin");
+
+                    b.Property<DateTime>("DateOfIssue")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("date_of_issue");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(5000)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(5000)")
+                        .HasColumnName("description");
+
+                    b.Property<string>("IssuingAuthority")
+                        .HasMaxLength(256)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(256)")
+                        .HasColumnName("issuing_authority");
+
+                    b.HasKey("Id")
+                        .HasName("PK__plant_passport__3213E83FA4C407E4");
+
+                    b.ToTable("plant_passport", (string)null);
                 });
 
             modelBuilder.Entity("Agrokultura.Models.PlantType", b =>

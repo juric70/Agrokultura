@@ -1,0 +1,48 @@
+﻿@model Agrokultura.Models.PlantPassport
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Plant Passport</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CountryOfOrigin)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CountryOfOrigin)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateOfIssue)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateOfIssue)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IssuingAuthority)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IssuingAuthority)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CertificateNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CertificateNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

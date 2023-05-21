@@ -51,6 +51,8 @@ public partial class AgroContext : DbContext
 
     public virtual DbSet<Terrain> Terrains { get; set; }
 
+    public virtual DbSet<PlantPassport> PlantPassports { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=fantom.fer.hr,3000;Initial Catalog=PI-01;User Id=pi01;Password=G1.aajmz!;TrustServerCertificate=True");
@@ -396,6 +398,10 @@ public partial class AgroContext : DbContext
                 .HasMaxLength(256)
                 .IsUnicode(false)
                 .HasColumnName("subspecies_name");
+            entity.Property(e => e.Color)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("color");
 
             entity.HasOne(d => d.GoodsType).WithMany(p => p.Plants)
                 .HasForeignKey(d => d.GoodsTypeId)
@@ -410,6 +416,41 @@ public partial class AgroContext : DbContext
                 .HasConstraintName("FK__plant__plant_typ__68487DD7");
         });
 
+        modelBuilder.Entity<PlantPassport>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__plant_passport__3213E83FA4C407E4");
+
+            entity.ToTable("plant_passport");
+
+            entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("id");
+
+            entity.Property(e => e.CountryOfOrigin)
+                .HasMaxLength(256)
+                .IsUnicode(false)
+                .HasColumnName("country_of_origin");
+
+            entity.Property(e => e.DateOfIssue)
+                .HasColumnName("date_of_issue");
+
+            entity.Property(e => e.IssuingAuthority)
+                .HasMaxLength(256)
+                .IsUnicode(false)
+                .HasColumnName("issuing_authority");
+
+            entity.Property(e => e.CertificateNumber)
+                .HasMaxLength(256)
+                .IsUnicode(false)
+                .HasColumnName("certificate_number");
+
+            entity.Property(e => e.Description)
+                .HasMaxLength(5000)
+                .IsUnicode(false)
+                .HasColumnName("description");
+
+           
+        });
         modelBuilder.Entity<PlantType>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__plant_ty__3213E83FD20B8659");
