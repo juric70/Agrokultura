@@ -9,6 +9,8 @@
     font-weight: 600;
     color: white;
     padding: 0;
+    position:relative;
+    z-index:100;
 }
 
 .navbar-collapse {
@@ -69,6 +71,7 @@
 
 .dropdown-menu {
     color: #4c7141;
+   
 }
 
 .dropdown-toggle, .nav-item {

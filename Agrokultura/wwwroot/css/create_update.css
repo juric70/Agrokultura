@@ -57,8 +57,29 @@
     border: 0;
     padding: 0.5rem 0.9rem;
 }
-
-.validation-faled-text {
-    color: red;
-    text-shadow: 1px 0.5px 1px #800000;
+.edit-data-btn {
+    float: right;
+    background: #59854c;
+    color: #ecda49;
+    text-decoration: none;
+    margin: 10px;
+    transition: 0.1s;
 }
+    .edit-data-btn a {
+        text-decoration: none;
+        color: #ecda49;
+        transition: 0.1s;
+    }
+    .edit-data-btn:hover {
+     
+        font-weight: bold;
+        border: 0;
+        color: #ecda49 !important;
+        background-image: linear-gradient(to right, #59854c, #37512f);
+        padding: 0.5rem 0.9rem;
+    }
+
+    .validation-faled-text {
+        color: red;
+        text-shadow: 1px 0.5px 1px #800000;
+    }
