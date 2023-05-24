@@ -27,25 +27,31 @@
         </dt>
         <dd class = "col-sm-8">
             @Html.DisplayFor(model => model.Ground.Name)
+               <a asp-controller="Grounds" asp-action="Details" asp-route-id="@Model.Ground.Id" class="icons-modify-in-details"><i class="fa-solid fa-circle-info"></i></a>
+
         </dd>
         <dt class = "col-sm-4">
             Vlasnik:
         </dt>
         <dd class = "col-sm-8">
             @Html.DisplayFor(model => model.Owner.FullName)
+               <a asp-controller="People" asp-action="Details" asp-route-id="@Model.Owner.Id" class="icons-modify-in-details"><i class="fa-solid fa-circle-info"></i></a>
+
         </dd>
         <dt class = "col-sm-4">
             Teren:
         </dt>
         <dd class = "col-sm-8">
             @Html.DisplayFor(model => model.Terrain.Name)
+               <a asp-controller="Terrains" asp-action="Details" asp-route-id="@Model.Terrain.Id" class="icons-modify-in-details"><i class="fa-solid fa-circle-info"></i></a>
+
         </dd>
     </dl>
     <div class="btn edit-data-btn">
-        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Uredi</a>
     </div>
     <div class="btn back-to-list">
-        <a asp-action="Index">Natrag</a>
+         <a href="javascript:history.back()">Natrag</a>
     </div>
 </div>
 </div>

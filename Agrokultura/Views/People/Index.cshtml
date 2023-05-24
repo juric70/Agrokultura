@@ -10,7 +10,10 @@
             <h2>Ljudi</h2>
         </div>
         <div class="index-header-add">
-            <a asp-action="Create" class="btn add-record"><i class="fa-solid fa-plus"></i>  Dodaj novi!</a>
+            <a asp-action="Create" class="btn add-record"><i class="fa-solid fa-plus"></i>  Osoba</a>
+        </div>
+        <div class="index-header-add ">
+            <a asp-controller="Cities" asp-action="Create" class="btn add-record mx-1"><i class="fa-solid fa-plus"></i> Grad </a>
         </div>
 
     </div>
@@ -33,10 +36,8 @@
             <th>
                 Grad
             </th>
-            <th>
-                Funkcija
-            </th>
-            <th></th>
+         
+              <th class="last_td">Info, Uredi, Obriši</th>
         </tr>
     </thead>
     <tbody>
@@ -56,9 +57,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.City.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role.Name)
             </td>
             <td>
                     <a asp-action="Details" asp-route-id="@item.Id" class="icons-modify"><i class="fa-solid fa-circle-info"></i></a>

@@ -45,20 +45,24 @@
         </dt>
         <dd class = "col-sm-8">
             @Html.DisplayFor(model => model.Plant.Name)
+                <a asp-controller="Plants" asp-action="Details" asp-route-id="@Model.Plant.Id" class="icons-modify-in-details"><i class="fa-solid fa-circle-info"></i></a>
+
         </dd>
         <dt class = "col-sm-4">
             Parcela:
         </dt>
         <dd class = "col-sm-8">
             @Html.DisplayFor(model => model.Plot.Name)
+                <a asp-controller="Plots" asp-action="Details" asp-route-id="@Model.Plot.Id" class="icons-modify-in-details"><i class="fa-solid fa-circle-info"></i></a>
+
         </dd>
     </dl>
 
     <div class="btn edit-data-btn">
-        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Uredi</a>
     </div>
     <div class="btn back-to-list">
-        <a asp-action="Index">Natrag</a>
+        <a href="javascript:history.back()">Natrag</a>
     </div>
 
     </div>

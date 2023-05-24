@@ -10,14 +10,20 @@
             <h2>Narudžbe</h2>
         </div>
         <div class="index-header-add">
-            <a asp-action="Create" class="btn add-record"><i class="fa-solid fa-plus"></i>  Dodaj novi!</a>
+            <a asp-action="Create" class="btn add-record"><i class="fa-solid fa-plus"></i>  Narudžba</a>
         </div>
+         <div class="index-header-add ">
+            <a asp-controller="OrderStatus" asp-action="Create" class="btn add-record mx-1"><i class="fa-solid fa-plus"></i> Status narudžbe </a>
+         </div>
 
     </div>
 
     <table class="table table-rounded table-striped table-hover table-modify table-borderless" id="table-cities">
         <thead class="thead-modify">
         <tr>
+                 <th>
+                Biljka
+            </th>
             <th>
                Količina dobara
             </th>
@@ -27,17 +33,18 @@
             <th>
                Status narudžbe
             </th>
-            <th>
-                Biljka
-            </th>
+       
             <th class="last_td">Info, Uredi, Obriši</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+                        <td>
+                @Html.DisplayFor(modelItem => item.Plant.Name)
+            </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AmountOfGoods)
+                @Html.DisplayFor(modelItem => item.AmountOfGoods) kg/kom
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Customer.FullName)
@@ -45,9 +52,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.OrderStatus.Name)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Plant.Name)
-            </td>
+
             <td>
                     <a asp-action="Details" asp-route-id="@item.Id" class="icons-modify"><i class="fa-solid fa-circle-info"></i></a>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="icons-modify"><i class="fa-solid fa-pen-to-square"></i></a>

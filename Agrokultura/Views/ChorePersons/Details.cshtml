@@ -20,27 +20,33 @@
         </dt>
             <dd class="col-sm-8">
             @Html.DisplayFor(model => model.Chore.Name)
+             <a asp-controller="Chores" asp-action="Details" asp-route-id="@Model.Chore.Id" class="icons-modify-in-details"><i class="fa-solid fa-circle-info"></i></a>
+
         </dd>
             <dt class="col-sm-4">
             Status narudžbe
         </dt>
             <dd class="col-sm-8 ">
             @Html.DisplayFor(model => model.OrderStatus.Name)
+             <a asp-controller="OrderStatus" asp-action="Details" asp-route-id="@Model.OrderStatus.Id" class="icons-modify-in-details"><i class="fa-solid fa-circle-info"></i></a>
+
         </dd>
             <dt class="col-sm-4">
             Naručitelj
         </dt>
             <dd class="col-sm-8">
             @Html.DisplayFor(model => model.Person.FullName)
+             <a asp-controller="People" asp-action="Details" asp-route-id="@Model.Person.Id" class="icons-modify-in-details"><i class="fa-solid fa-circle-info"></i></a>
+
         </dd>
     </dl>
         <div class="btn edit-data-btn">
-            <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+            <a asp-action="Edit" asp-route-id="@Model?.Id">Uredi</a>
         </div>
 
 
         <div class="btn back-to-list">
-            <a asp-action="Index">Natrag</a>
+            <a href="javascript:history.back()">Natrag</a>
         </div>
     </div>
 

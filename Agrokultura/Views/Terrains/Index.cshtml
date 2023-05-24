@@ -8,7 +8,7 @@
     <div class="index-header">
 
         <div class="index-header-title">
-            <h2>Gradovi</h2>
+            <h2>Tereni</h2>
         </div>
         <div class="index-header-add">
             <a asp-action="Create" class="btn add-record"><i class="fa-solid fa-plus"></i>  Dodaj novi!</a>
@@ -16,9 +16,9 @@
 
     </div>
 
-    <table class="table table-rounded table-striped table-hover table-modify table-borderless" id="table-cities">
+    <table class="table table-rounded table-striped table-hover table-modify table-borderless" id="table-terrains">
         <thead class="thead-modify">
-    <thead>
+
         <tr>
             <th>
                Naziv
@@ -29,7 +29,7 @@
             <th>
                Nagib tla
             </th>
-            <th></th>
+           <th class="last_td">Info, Uredi, Obriši</th>
         </tr>
     </thead>
     <tbody>
@@ -57,7 +57,7 @@
 <script>
 
     $(document).ready(function () {
-        $('#table-cities').DataTable({
+        $('#table-terrains').DataTable({
             "language": {
                 "sEmptyTable": "Nema dostupnih podataka",
                 "sInfo": "Prikazano _START_ do _END_ od ukupno _TOTAL_ zapisa",

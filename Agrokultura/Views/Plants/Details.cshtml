@@ -44,26 +44,32 @@
         </dt>
         <dd class = "col-sm-8">
             @Html.DisplayFor(model => model.GoodsType.Name)
+          <a asp-controller="GoodsTypes" asp-action="Details" asp-route-id="@Model.GoodsType.Id" class="icons-modify-in-details"><i class="fa-solid fa-circle-info"></i></a>
+
         </dd>
         <dt class = "col-sm-4">
             Proizvođač:
         </dt>
         <dd class = "col-sm-8">
             @Html.DisplayFor(model => model.Manufacturer.FullName)
+          <a asp-controller="People" asp-action="Details" asp-route-id="@Model.Manufacturer.Id" class="icons-modify-in-details"><i class="fa-solid fa-circle-info"></i></a>
+
         </dd>
         <dt class = "col-sm-4">
             Vrsta biljke:
         </dt>
         <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.PlantType.Name)
-        </dd>
+          @Html.DisplayFor(model => model.PlantType.Name)  
+          <a asp-controller="PlantTypes" asp-action="Details" asp-route-id="@Model.PlantType.Id" class="icons-modify-in-details"><i class="fa-solid fa-circle-info"></i></a>
+      </dd>
+      
                                                                
     </dl>
     <div class="btn edit-data-btn">
-        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Uredi</a>
     </div>
     <div class="btn back-to-list">
-        <a asp-action="Index">Natrag</a>
+        <a href="javascript:history.back()">Natrag</a>
     </div>
 </div>
 </div>

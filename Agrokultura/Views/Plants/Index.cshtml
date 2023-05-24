@@ -10,10 +10,15 @@
         <div class="index-header-title">
             <h2>Biljke</h2>
         </div>
-        <div class="index-header-add">
-            <a asp-action="Create" class="btn add-record"><i class="fa-solid fa-plus"></i>  Dodaj novi!</a>
+        <div class="index-header-add ">
+            <a asp-action="Create" class="btn add-record mx-1"><i class="fa-solid fa-plus"></i>  Biljka</a>
         </div>
-
+        <div class="index-header-add ">
+            <a asp-controller="GoodsTypes" asp-action="Create" class="btn add-record mx-1"><i class="fa-solid fa-plus"></i> Vrsta dobra</a>
+        </div>
+           <div class="index-header-add ">
+            <a asp-controller="PlantTypes" asp-action="Create" class="btn add-record mx-1"><i class="fa-solid fa-plus"></i> Vrsta biljke</a>
+        </div>
     </div>
 
     <table class="table table-rounded table-striped table-hover table-modify table-borderless" id="table-cities">
@@ -22,16 +27,12 @@
             <th>
                 Naziv
             </th>
-            <th>
-                Opis
-            </th>
+
             <th>
                 Naziv podvrste
             </th>
           
-            <th>
-                Cijena
-            </th>
+
             <th>
                 Vrsta dobara
             </th>
@@ -40,8 +41,9 @@
                 Vrsta biljke
             </th>
             <th>
-                Boja
+                Cijena
             </th>
+         
                 <th class="last_td">Info, Uredi, Obriši</th>
         </tr>
     </thead>
@@ -51,16 +53,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
+          
             <td>
                 @Html.DisplayFor(modelItem => item.SubspeciesName)
             </td>
           
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.GoodsType.Name)
             </td>
@@ -68,9 +65,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PlantType.Name)
             </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Color)
-                </td>
+               <td>
+                @Html.DisplayFor(modelItem => item.Price) KM/(kg/kom)
+            </td>
+    
             <td>
                     <a asp-action="Details" asp-route-id="@item.Id" class="icons-modify"><i class="fa-solid fa-circle-info"></i></a>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="icons-modify"><i class="fa-solid fa-pen-to-square"></i></a>

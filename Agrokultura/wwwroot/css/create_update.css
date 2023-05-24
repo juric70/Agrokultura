@@ -83,3 +83,13 @@
         color: red;
         text-shadow: 1px 0.5px 1px #800000;
     }
+.icons-modify-in-details {
+    text-decoration: none;
+    color: #59854c !important;
+    padding-left: 12px;
+}
+    .icons-modify-in-details:hover {
+        color: #ecda49 !important;
+    }
+
+
