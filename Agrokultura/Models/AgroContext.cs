@@ -226,7 +226,6 @@ public partial class AgroContext : DbContext
         modelBuilder.Entity<GoodsType>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__goods_ty__3213E83FCF7F9773");
-
             entity.ToTable("goods_type");
 
             entity.Property(e => e.Id)
@@ -236,6 +235,7 @@ public partial class AgroContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("name");
+            
         });
 
         modelBuilder.Entity<Ground>(entity =>
@@ -282,7 +282,8 @@ public partial class AgroContext : DbContext
 
             entity.HasOne(d => d.Plant).WithMany(p => p.IncomeAndExpenses)
                 .HasForeignKey(d => d.PlantId)
-                .HasConstraintName("FK__income_an__plant__5FB337D6");
+                .HasConstraintName("FK__income_an__plant__5FB337D6")
+             .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasOne(d => d.Plot).WithMany(p => p.IncomeAndExpenses)
                 .HasForeignKey(d => d.PlotId)
