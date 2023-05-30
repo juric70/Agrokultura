@@ -3,96 +3,64 @@
 @{
     ViewData["Title"] = "Index";
 }
-<div class="table-responsive card card-modify">
-    <div class="index-header">
 
-        <div class="index-header-title">
-            <h2>Ugovori</h2>
-        </div>
-        <div class="index-header-add">
-            <a asp-action="Create" class="btn add-record"><i class="fa-solid fa-plus"></i>  Dodaj novi!</a>
-        </div>
+<h1>Index</h1>
 
-    </div>
-
-    <table class="table table-rounded table-striped table-hover table-modify table-borderless" id="table-cities">
-        <thead class="thead-modify">
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
         <tr>
             <th>
-               Naziv
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-               Datum sklapanja ugovora
+                @Html.DisplayNameFor(model => model.DateOfConclusion)
             </th>
             <th>
-                Datum isteka ugovora
+                @Html.DisplayNameFor(model => model.DateOfExpiration)
             </th>
             <th>
-               Primatelj usluge 
+                @Html.DisplayNameFor(model => model.Beneficiary)
             </th>
             <th>
-               Iznajmljivač
+                @Html.DisplayNameFor(model => model.Provider)
             </th>
-            <th class="last_td">Info, Uredi, Obriši</th>
-
+            <th>
+                @Html.DisplayNameFor(model => model.ContractType)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfConclusion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfExpiration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Beneficiary.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Provider.FullName)
-            </td>
-                <td class="last_td">
-                    <a asp-action="Details" asp-route-id="@item.Id" class="icons-modify"><i class="fa-solid fa-circle-info"></i></a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="icons-modify"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="icons-modify icons-modify-delete"><i class="fa-solid fa-trash"></i></a>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
                 </td>
-        </tr>
-}
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfConclusion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfExpiration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Beneficiary.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Provider.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContractType)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
-</div>
-<script>
-
-    $(document).ready(function () {
-        $('#table-cities').DataTable({
-            "language": {
-                "sEmptyTable": "Nema dostupnih podataka",
-                "sInfo": "Prikazano _START_ do _END_ od ukupno _TOTAL_ zapisa",
-                "sInfoEmpty": "Prikazano 0 do 0 od 0 zapisa",
-                "sInfoFiltered": "(filtrirano iz ukupno _MAX_ zapisa)",
-                "sInfoPostFix": "",
-                "sInfoThousands": ",",
-                "sLengthMenu": "Prikaži _MENU_ zapisa po stranici",
-                "sLoadingRecords": "Učitavanje...",
-                "sProcessing": "Obrada...",
-                "sSearch": "Pretraga:",
-                "sZeroRecords": "Nema rezultata",
-                "oPaginate": {
-                    "sFirst": "Prva",
-                    "sPrevious": "Prethodna",
-                    "sNext": "Sljedeća",
-                    "sLast": "Posljednja"
-                },
-                "oAria": {
-                    "sSortAscending": ": aktivirajte za sortiranje stupca uzlazno",
-                    "sSortDescending": ": aktivirajte za sortiranje stupca silazno"
-                }
-            }
-        });
-    });
-</script>
-

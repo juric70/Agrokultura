@@ -60,7 +60,7 @@ namespace Agrokultura.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Coordinates,Longitudes,Corners,GroundId,TerrainId,OwnerId")] Plot plot)
+        public async Task<IActionResult> Create([Bind("Id,Name,SunPresence,GroundSlope,GroundId,TerrainId,OwnerId,PlotArea")] Plot plot)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +98,7 @@ namespace Agrokultura.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Coordinates,Longitudes,Corners,GroundId,TerrainId,OwnerId")] Plot plot)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,SunPresence,GroundSlope,GroundId,TerrainId,OwnerId,PlotArea")] Plot plot)
         {
             if (id != plot.Id)
             {

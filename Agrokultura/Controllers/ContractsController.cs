@@ -58,16 +58,16 @@ namespace Agrokultura.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ProviderId,BeneficiaryId,DateOfConclusion,DateOfExpiration")] Contract contract)
+        public async Task<IActionResult> Create([Bind("Id,Name,ProviderId,BeneficiaryId,DateOfConclusion,DateOfExpiration,ContractType")] Contract contract)
         {
             ViewData["BeneficiaryId"] = new SelectList(_context.People, "Id", "FullName", contract.BeneficiaryId);
             ViewData["ProviderId"] = new SelectList(_context.People, "Id", "FullName", contract.ProviderId);
-    
-            
-                _context.Add(contract);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
-          
+
+
+            _context.Add(contract);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+
         }
 
         // GET: Contracts/Edit/5
@@ -93,7 +93,7 @@ namespace Agrokultura.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ProviderId,BeneficiaryId,DateOfConclusion,DateOfExpiration")] Contract contract)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ProviderId,BeneficiaryId,DateOfConclusion,DateOfExpiration,ContractType")] Contract contract)
         {
             if (id != contract.Id)
             {
@@ -159,14 +159,14 @@ namespace Agrokultura.Controllers
             {
                 _context.Contracts.Remove(contract);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ContractExists(int id)
         {
-          return (_context.Contracts?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Contracts?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

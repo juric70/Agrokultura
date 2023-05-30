@@ -175,7 +175,10 @@ public partial class AgroContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("name");
             entity.Property(e => e.ProviderId).HasColumnName("provider_id");
-
+            entity.Property(e => e.ContractType)
+        .HasMaxLength(100) 
+        .IsUnicode(false)
+        .HasColumnName("contract_type");
             entity.HasOne(d => d.Beneficiary).WithMany(p => p.ContractBeneficiaries)
                 .HasForeignKey(d => d.BeneficiaryId)
                 .OnDelete(DeleteBehavior.Cascade)
@@ -194,18 +197,22 @@ public partial class AgroContext : DbContext
             entity.ToTable("contract_plot");
 
             entity.Property(e => e.Id)
-               .ValueGeneratedOnAdd()
-              .HasColumnName("id");
+                .ValueGeneratedOnAdd()
+                .HasColumnName("id");
             entity.Property(e => e.ContractId).HasColumnName("contract_id");
             entity.Property(e => e.PlotId).HasColumnName("plot_id");
+            entity.Property(e => e.MonthlyPayment).HasColumnName("monthly_payment"); 
+            entity.Property(e => e.Price).HasColumnName("price"); 
 
             entity.HasOne(d => d.Contract).WithMany(p => p.ContractPlots)
                 .HasForeignKey(d => d.ContractId)
-                .HasConstraintName("FK__contract___contr__5DCAEF64");
+                .HasConstraintName("FK__contract___contr__5DCAEF64")
+                .OnDelete(DeleteBehavior.Cascade); 
 
             entity.HasOne(d => d.Plot).WithMany(p => p.ContractPlots)
                 .HasForeignKey(d => d.PlotId)
-                .HasConstraintName("FK__contract___plot___5EBF139D");
+                .HasConstraintName("FK__contract___plot___5EBF139D")
+                .OnDelete(DeleteBehavior.Cascade); 
         });
 
         modelBuilder.Entity<Country>(entity =>
@@ -226,6 +233,7 @@ public partial class AgroContext : DbContext
         modelBuilder.Entity<GoodsType>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__goods_ty__3213E83FCF7F9773");
+
             entity.ToTable("goods_type");
 
             entity.Property(e => e.Id)
@@ -235,7 +243,12 @@ public partial class AgroContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("name");
-            
+            entity.Property(e => e.MeasurementUnit)
+        .HasMaxLength(20)
+        .IsUnicode(false)
+        .HasColumnName("measurement_unit");
+            entity.Property(e => e.Quantity)
+        .HasColumnName("quantity");
         });
 
         modelBuilder.Entity<Ground>(entity =>
@@ -282,8 +295,7 @@ public partial class AgroContext : DbContext
 
             entity.HasOne(d => d.Plant).WithMany(p => p.IncomeAndExpenses)
                 .HasForeignKey(d => d.PlantId)
-                .HasConstraintName("FK__income_an__plant__5FB337D6")
-             .OnDelete(DeleteBehavior.Cascade);
+                .HasConstraintName("FK__income_an__plant__5FB337D6");
 
             entity.HasOne(d => d.Plot).WithMany(p => p.IncomeAndExpenses)
                 .HasForeignKey(d => d.PlotId)
@@ -480,23 +492,19 @@ public partial class AgroContext : DbContext
             entity.Property(e => e.Id)
              .ValueGeneratedOnAdd()
               .HasColumnName("id");
-            entity.Property(e => e.Coordinates)
-                .HasMaxLength(256)
-                .IsUnicode(false)
-                .HasColumnName("coordinates");
-            entity.Property(e => e.Corners)
-                .HasMaxLength(256)
-                .IsUnicode(false)
-                .HasColumnName("corners");
-            entity.Property(e => e.GroundId).HasColumnName("ground_id");
-            entity.Property(e => e.Longitudes)
-                .HasMaxLength(256)
-                .IsUnicode(false)
-                .HasColumnName("longitudes");
+
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("name");
+            entity.Property(e => e.PlotArea).HasColumnName("plot_area");
+            entity.Property(e => e.SunPresence)
+        .HasMaxLength(100)
+        .IsUnicode(false)
+        .HasColumnName("sun_presence");
+
+            entity.Property(e => e.GroundSlope)
+                .HasColumnName("ground_slope");
             entity.Property(e => e.OwnerId).HasColumnName("owner_id");
             entity.Property(e => e.TerrainId).HasColumnName("terrain_id");
 
@@ -541,15 +549,12 @@ public partial class AgroContext : DbContext
             entity.Property(e => e.Id)
                .ValueGeneratedOnAdd()
               .HasColumnName("id");
-            entity.Property(e => e.GroundSlope).HasColumnName("ground_slope");
+           
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("name");
-            entity.Property(e => e.SunPersence)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("sun_persence");
+            
         });
 
         OnModelCreatingPartial(modelBuilder);

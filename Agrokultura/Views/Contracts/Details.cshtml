@@ -4,50 +4,51 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="row row-udpate_create mx-auto">
-    <div class="col-md-6 mx-auto col-update_create">
-        <h1>Detalji ugovora:</h1>
+<h1>Details</h1>
 
-        <dl class="row form-group-update_create">
-        <dt class = "col-sm-4">
-           Naziv:
+<div>
+    <h4>Contract</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-8">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class = "col-sm-4">
-            Datum sklapanja ugovora:
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateOfConclusion)
         </dt>
-        <dd class = "col-sm-8">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DateOfConclusion)
         </dd>
-        <dt class = "col-sm-4">
-            Datum isteka ugovora:
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateOfExpiration)
         </dt>
-        <dd class = "col-sm-8">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DateOfExpiration)
         </dd>
-        <dt class = "col-sm-4">
-           Primatelj usluge:
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Beneficiary)
         </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.Beneficiary.FullName)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Beneficiary.Id)
         </dd>
-        <dt class = "col-sm-4">
-            Iznajmljivač:
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Provider)
         </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.Provider.FullName)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Provider.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ContractType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ContractType)
         </dd>
     </dl>
-    <div class="btn edit-data-btn">
-        <a asp-action="Edit" asp-route-id="@Model?.Id">Uredi</a>
-    </div>
-
-
-    <div class="btn back-to-list">
-        <a href="javascript:history.back()">Natrag</a>
-    </div>
 </div>
-
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
 </div>
