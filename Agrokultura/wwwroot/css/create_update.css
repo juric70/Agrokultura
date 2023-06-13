@@ -91,5 +91,13 @@
     .icons-modify-in-details:hover {
         color: #ecda49 !important;
     }
+.delete-btn {
+    background-color: red;
+    color: white;
+    transition: background-color 0.3s;
+}
 
+    .delete-btn:hover {
+        background-color: darkred;
+    }
 
