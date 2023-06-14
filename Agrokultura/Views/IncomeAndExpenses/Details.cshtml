@@ -38,7 +38,7 @@
            Količina dobara:
         </dt>
         <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.AmountOfGoods) (kg ili komad)
+                @Html.DisplayFor(model => model.AmountOfGoods)  -  @Html.DisplayFor(model => model.Plant.GoodsType.Name)
         </dd>
         <dt class = "col-sm-4">
             Biljka:
