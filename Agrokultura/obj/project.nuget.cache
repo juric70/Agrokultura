@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pUhP2qeIwFF3eTsgRbrQZGleyAaSFTV0Rg3qLkR89uv/5awJGd5p0/sfgfzaIV3pB1ld17sI0izBIo5wfRPgkQ==",
+  "dgSpecHash": "4r4hE/UdY0sqBj58jHckRA/rrPZOhYsuOOcC+4s4GjC3fg2SO4O63JpEuJTzcnlPzB9dUd9lfGHvVuwk9yws9g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\HOME\\Desktop\\pu\\Agrokultura\\Agrokultura.csproj",
+  "projectFilePath": "C:\\Users\\HOME\\Desktop\\novo pi\\Agrokultura\\Agrokultura.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HOME\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\HOME\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
