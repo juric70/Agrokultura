@@ -27,7 +27,18 @@ namespace Agrokultura.Controllers
             var orders = agroContext.ToList();
     var chores = ChoreContext.ToList();
 
-    var combinedViewModel = new CombinedViewModel
+            double totalIncome = _context.IncomeAndExpenses
+                          .Where(ie => ie.Price > 0)
+                          .Sum(ie => ie.Price ?? 0);
+
+            double totalExpense = Math.Abs(_context.IncomeAndExpenses
+                .Where(ie => ie.Price < 0)
+                .Sum(ie => ie.Price ?? 0));
+
+            ViewBag.TotalIncome = totalIncome;
+            ViewBag.TotalExpense = totalExpense;
+
+            var combinedViewModel = new CombinedViewModel
     {
         Orders = orders,
         Chores = chores
