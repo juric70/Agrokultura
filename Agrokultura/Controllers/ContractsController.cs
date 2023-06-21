@@ -83,8 +83,12 @@ namespace Agrokultura.Controllers
             {
                 return NotFound();
             }
-            ViewData["BeneficiaryId"] = new SelectList(_context.People, "Id", "FullName", contract.BeneficiaryId);
-            ViewData["ProviderId"] = new SelectList(_context.People, "Id", "FullName", contract.ProviderId);
+            ViewBag.BeneficiaryId = new SelectList(_context.People, "Id", "FullName", contract.BeneficiaryId);
+if (contract.ProviderId != null)
+{
+    ViewBag.ProviderId = new SelectList(_context.People, "Id", "FullName", contract.ProviderId);
+}
+
             return View(contract);
         }
 
@@ -100,29 +104,11 @@ namespace Agrokultura.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(contract);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ContractExists(contract.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["BeneficiaryId"] = new SelectList(_context.People, "Id", "FullName", contract.BeneficiaryId);
-            ViewData["ProviderId"] = new SelectList(_context.People, "Id", "FullNmae", contract.ProviderId);
-            return View(contract);
+
+            _context.Update(contract);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+
         }
 
         // GET: Contracts/Delete/5
