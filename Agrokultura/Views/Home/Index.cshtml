@@ -154,6 +154,45 @@
 
         </div>
     </div>
+    <p class="h2 ms-2">Detalji po parceli</p>
+
+    <table class="table table-rounded table-striped table-hover table-modify table-borderless home-tablica">
+        <thead class="thead-modify">
+
+            <tr>
+                <th>
+                    Parcela
+                </th>
+                <th>
+                    Prihodi
+                </th>
+                <th>
+                    Troškovi
+                </th>
+                <th>
+                    Zbroj
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.TableData)
+            {
+                <tr>
+                    <td>@item.ParcelName €</td>
+                    <td>@item.TotalIncome €</td>
+                    <td>@item.TotalExpense €</td>
+                    <td>@item.TotalBalance €</td>
+                </tr>
+            }
+
+
+
+
+        </tbody>
+    </table>
+
 
 </div>
 

@@ -44,7 +44,27 @@ namespace Agrokultura.Controllers
         Chores = chores
     };
 
-    return View(combinedViewModel);
+
+            var parcels = _context.Plots.ToList();
+            var incomeAndExpenses = _context.IncomeAndExpenses.ToList();
+
+            var tableData = parcels.Select(parcel => new
+            {
+                ParcelName = parcel.Name,
+                TotalIncome = incomeAndExpenses
+                    .Where(ie => ie.PlotId == parcel.Id && ie.Price > 0)
+                    .Sum(ie => ie.Price ?? 0),
+                TotalExpense = Math.Abs(incomeAndExpenses
+                    .Where(ie => ie.PlotId == parcel.Id && ie.Price < 0)
+                    .Sum(ie => ie.Price ?? 0)),
+                TotalBalance = incomeAndExpenses
+                 .Where(ie => ie.PlotId == parcel.Id)
+                     .Sum(ie => ie.Price ?? 0)
+            }).ToList();
+
+            ViewBag.TableData = tableData;
+
+            return View(combinedViewModel);
         }
 
         public IActionResult Privacy()
