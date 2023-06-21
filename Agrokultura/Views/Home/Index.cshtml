@@ -1,4 +1,5 @@
-﻿@{
+﻿@model CombinedViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -43,7 +44,7 @@
             <div class="small-box kartica mb-3"
                  style="background-color: #4c7141; color: #ffffff">
                 <div class="inner">
-                    <div class="h2">0</div>
+                    <div class="h2">@ViewBag.Order</div>
                     <p>Narudžbe</p>
                 </div>
                 <i class="fa-regular fa-file-lines fa-2x ikona"
@@ -54,7 +55,7 @@
             <div class="small-box kartica mb-3"
                  style="background-color: #4c7141; color: #ffffff">
                 <div class="inner">
-                    <div class="h2">0</div>
+                    <div class="h2">@ViewBag.People</div>
                     <p>Zaposleni</p>
                 </div>
                 <i class="fa-regular fa-user fa-2x ikona" style="color: #ecda49"></i>
@@ -87,18 +88,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                   @foreach (var item in Model.Orders) {
+        <tr>
                         <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-
-
+                @Html.DisplayFor(modelItem => item.Plant.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountOfGoods) kg/kom
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderStatus.Name)
+            </td>
                     </tr>
+                   }
 
 
 
@@ -127,20 +132,23 @@
                     </tr>
                 </thead>
                 <tbody>
-
-
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-
+                    @foreach (var item in Model.Chores)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Chore.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderStatus.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Person.FullName)
+                            </td>
                     </tr>
-
+}
                 </tbody>
             </table>
 

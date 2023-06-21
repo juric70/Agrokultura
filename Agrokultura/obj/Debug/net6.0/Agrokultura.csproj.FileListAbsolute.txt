@@ -2315,3 +2315,4 @@ C:\Users\HOME\Desktop\novo pi\Agrokultura\obj\Debug\net6.0\refint\Agrokultura.dl
 C:\Users\HOME\Desktop\novo pi\Agrokultura\obj\Debug\net6.0\Agrokultura.pdb
 C:\Users\HOME\Desktop\novo pi\Agrokultura\obj\Debug\net6.0\Agrokultura.genruntimeconfig.cache
 C:\Users\HOME\Desktop\novo pi\Agrokultura\obj\Debug\net6.0\ref\Agrokultura.dll
+C:\Users\Zvonko\source\repos\Agrokultura\Agrokultura\bin\Debug\net6.0\Views\PlantPassports\Index.cshtml

@@ -1,21 +1,39 @@
 ﻿using Agrokultura.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Agrokultura.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly AgroContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        
+        public HomeController(AgroContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            int brojNarudzbi = _context.Orders.Count()-2;
+            ViewBag.Order = brojNarudzbi;
+            int numberOfPeople = _context.People.Count();
+            ViewBag.People = numberOfPeople;
+            var agroContext = _context.Orders.Include(o => o.Customer).Include(o => o.OrderStatus).Include(o => o.Plant);
+            var ChoreContext = _context.ChorePeople.Include(c => c.Chore).Include(c => c.OrderStatus).Include(c => c.Person);
+
+            var orders = agroContext.ToList();
+    var chores = ChoreContext.ToList();
+
+    var combinedViewModel = new CombinedViewModel
+    {
+        Orders = orders,
+        Chores = chores
+    };
+
+    return View(combinedViewModel);
         }
 
         public IActionResult Privacy()
