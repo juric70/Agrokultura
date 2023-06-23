@@ -6,6 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Agrokultura.Models;
+using Aspose.Pdf;
+using Aspose.Pdf.Text;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+
 
 namespace Agrokultura.Controllers
 {
@@ -17,6 +22,64 @@ namespace Agrokultura.Controllers
         {
             _context = context;
         }
+        public ActionResult GenerirajPDF()
+        {
+            Document pdfDokument = new Document();
+            Page stranica = pdfDokument.Pages.Add();
+
+            TextFragment text1 = new TextFragment("Agrokultura Narudzbe");
+            text1.Position = new Position(160, 750);
+            text1.TextState.FontSize = 25;
+            stranica.Paragraphs.Add(text1);
+
+            Table table = new Table();
+            table.ColumnWidths = "100 100 100 100";
+            table.DefaultCellBorder = new BorderInfo(BorderSide.All, 0.1f);
+            table.DefaultCellTextState.LineSpacing = 7;
+
+            Row headerRow = table.Rows.Add();
+            headerRow.Cells.Add("Biljka");
+            headerRow.Cells.Add("Količina dobara");
+            headerRow.Cells.Add("Naručitelj");
+            headerRow.Cells.Add("Status narudzbe");
+
+            var narudzbe = _context.Orders
+         .Include(o => o.Plant)
+         .Include(o => o.Customer)
+         .Include(o => o.OrderStatus)
+         .ToList();
+
+            foreach (var narudzba in narudzbe)
+            {
+                Row row = table.Rows.Add();
+                row.Cells.Add(narudzba.Plant.Name);
+                row.Cells.Add(narudzba.AmountOfGoods.ToString());
+                row.Cells.Add(narudzba.Customer.FullName);
+                row.Cells.Add(narudzba.OrderStatus.Name);
+            }
+
+            TextFragment text2 = new TextFragment("");
+            text2.Position = new Position(160, 700);
+            text2.TextState.FontSize = 15;
+
+            stranica.Paragraphs.Add(text2);
+            stranica.Paragraphs.Add(table);
+
+            // Spremite PDF dokument na željenu lokaciju
+           // string putanja = "C:\\Users\\Zvonko\\source\\repos\\AsposePdfTestiranje\\AsposePdfTestiranje\\";
+           // putanja = putanja + "novi_dokument3.pdf";
+            
+           
+
+            // Spremite PDF dokument u MemoryStream
+            MemoryStream memoryStream = new MemoryStream();
+            pdfDokument.Save(memoryStream);
+            memoryStream.Position = 0;
+            pdfDokument.Dispose();
+            // Vratite PDF dokument kao preuzimanje
+            return File(memoryStream, "application/pdf", "PrintOrders.pdf");
+        }
+
 
         // GET: Orders
         public async Task<IActionResult> Index()

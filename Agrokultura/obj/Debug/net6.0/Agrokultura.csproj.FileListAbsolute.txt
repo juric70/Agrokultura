@@ -2316,3 +2316,9 @@ C:\Users\HOME\Desktop\novo pi\Agrokultura\obj\Debug\net6.0\Agrokultura.pdb
 C:\Users\HOME\Desktop\novo pi\Agrokultura\obj\Debug\net6.0\Agrokultura.genruntimeconfig.cache
 C:\Users\HOME\Desktop\novo pi\Agrokultura\obj\Debug\net6.0\ref\Agrokultura.dll
 C:\Users\Zvonko\source\repos\Agrokultura\Agrokultura\bin\Debug\net6.0\Views\PlantPassports\Index.cshtml
+C:\Users\Zvonko\source\repos\Agrokultura\Agrokultura\bin\Debug\net6.0\Aspose.PDF.dll
+C:\Users\Zvonko\source\repos\Agrokultura\Agrokultura\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Zvonko\source\repos\Agrokultura\Agrokultura\bin\Debug\net6.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\Zvonko\source\repos\Agrokultura\Agrokultura\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\Zvonko\source\repos\Agrokultura\Agrokultura\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\Zvonko\source\repos\Agrokultura\Agrokultura\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
