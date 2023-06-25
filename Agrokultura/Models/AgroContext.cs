@@ -6,7 +6,7 @@ namespace Agrokultura.Models;
 
 public partial class AgroContext : DbContext
 {
-    public AgroContext()
+    public AgroContext(DbContextOptionsBuilder<AgroContext> options)
     {
     }
 
@@ -52,6 +52,11 @@ public partial class AgroContext : DbContext
     public virtual DbSet<Terrain> Terrains { get; set; }
 
     public virtual DbSet<PlantPassport> PlantPassports { get; set; }
+
+    public async Task<T> FindAsync<T>(params object[] keyValues) where T : class
+    {
+        return await Set<T>().FindAsync(keyValues);
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.

@@ -2,7 +2,15 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
 }
+body {
+    margin-bottom: 60px;
+    overflow-x: hidden;
+}
 
+.dropdown-menu {
+    width: fit-content !important;
+    min-width: 100% !important;
+}
 .nav-costum {
     height: 60px;
     background-color: #59854c;

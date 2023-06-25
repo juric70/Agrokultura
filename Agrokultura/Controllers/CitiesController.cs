@@ -145,5 +145,10 @@ namespace Agrokultura.Controllers
         {
           return (_context.Cities?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        internal Task Details(object id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
