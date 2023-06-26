@@ -1,13 +1,19 @@
-﻿@model IEnumerable<Agrokultura.Models.Order>
+﻿@using Microsoft.EntityFrameworkCore;
+@model IEnumerable<Agrokultura.Models.Order>
 
 @{
     ViewData["Title"] = "Index";
 }
+
+
 <div class="table-responsive card card-modify">
     <div class="index-header">
+ @*       <div class="btn">
         @Html.ActionLink("Preuzmi PDF", "GenerirajPDF", "Orders")
-
-
+        </div>*@
+        <div class="btn" style=" background-image: linear-gradient(to right, #ecda49, #d0ba16);">
+            @Html.ActionLink("Preuzmi PDF", "GenerirajPDF", "Orders", null, new { style = "text-decoration: none; color: green" })
+        </div>
         <div class="index-header-title">
             <h2>Narudžbe</h2>
         </div>
@@ -27,7 +33,7 @@
                 Biljka
             </th>
             <th>
-               Količina dobara
+               Količina
             </th>
             <th>
                 Naručitelj
@@ -46,7 +52,31 @@
                 @Html.DisplayFor(modelItem => item.Plant.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AmountOfGoods) kg/kom
+                        @{
+                            var dbContextOptions = new DbContextOptionsBuilder<AgroContext>()
+                            .UseSqlServer("YourConnectionString") // Replace "YourConnectionString" with the actual connection string
+                            .Options;
+                            var dbContext = new AgroContext(dbContextOptions);
+                            var goodsType = dbContext.GoodsTypes.Find(item.Plant.GoodsTypeId);
+                        }
+                        @Html.DisplayFor(modelItem => item.AmountOfGoods)
+
+
+                        @if (goodsType != null)
+                        {
+                            if (goodsType.MeasurementUnit == "kg")
+                            {
+                                <span>kilogram</span>
+                            }
+                            else if (goodsType.MeasurementUnit == "piece")
+                            {
+                                <span>komad</span>
+                            }
+                        }
+                        else
+                        {
+                            <span>Measurement unit not available</span>
+                        }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Customer.FullName)
@@ -55,7 +85,7 @@
                 @Html.DisplayFor(modelItem => item.OrderStatus.Name)
             </td>
 
-            <td>
+                    <td class="last_td">
                     <a asp-action="Details" asp-route-id="@item.Id" class="icons-modify"><i class="fa-solid fa-circle-info"></i></a>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="icons-modify"><i class="fa-solid fa-pen-to-square"></i></a>
                     <a asp-action="Delete" asp-route-id="@item.Id" class="icons-modify icons-modify-delete"><i class="fa-solid fa-trash"></i></a>

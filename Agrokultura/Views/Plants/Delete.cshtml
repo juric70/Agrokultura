@@ -9,8 +9,6 @@
 
     <h3>Jeste li sigurni da želite ovo izbrisati?</h3>
     <div>
-        <h4>Biljka</h4>
-        <hr />
         <dl class="row">
             <dt class="col-sm-2">
                 Naziv: 
@@ -31,19 +29,37 @@
                 @Html.DisplayFor(model => model.SubspeciesName)
             </dd>
             <dt class="col-sm-2">
-                Količina robe: 
+                Količina
+               @if (Model.GoodsType.MeasurementUnit == "kg")
+                {
+                    <span>(kilogram)</span>
+                }
+                else if (Model.GoodsType.MeasurementUnit == "piece")
+                {
+                    <span>(komad)</span>
+                }
+          
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.AmountOfGoods)
             </dd>
             <dt class="col-sm-2">
-                Cijena: 
+                Cijena  
+                @if (Model.GoodsType.MeasurementUnit == "kg")
+                {
+                    <span>(KM/kilogram)</span>
+                }
+                else if (Model.GoodsType.MeasurementUnit == "piece")
+                {
+                    <span>(KM/komad)</span>
+                }
+               
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.Price)
             </dd>
             <dt class="col-sm-2">
-                Vrsta robe: 
+                Vrsta dobra: 
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.GoodsType.Name)
@@ -59,12 +75,6 @@
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.PlantType.Name)
-            </dd>
-            <dt class="col-sm-2">
-                Boja:
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Color)
             </dd>
         </dl>
 

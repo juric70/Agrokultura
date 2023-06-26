@@ -31,13 +31,29 @@
             Količina dobara koje biljka u prosjeku daje :
         </dt>
         <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.AmountOfGoods) kg/kom
+            @Html.DisplayFor(model => model.AmountOfGoods)
+                @if (Model.GoodsType.MeasurementUnit == "kg")
+                {
+                    <span>kilogram</span>
+                }
+                else if (Model.GoodsType.MeasurementUnit == "piece")
+                {
+                    <span>komad</span>
+                }
         </dd>
         <dt class = "col-sm-4">
             Cijena:
         </dt>
         <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.Price) KM
+                @Html.DisplayFor(model => model.Price) 
+                @if (Model.GoodsType.MeasurementUnit == "kg")
+                {
+                    <span>KM/kilogram</span>
+                }
+                else if (Model.GoodsType.MeasurementUnit == "piece")
+                {
+                    <span>KM/komad</span>
+                }
         </dd>
         <dt class = "col-sm-4">
             Vrsta dobara:

@@ -14,7 +14,6 @@ using Xunit;
 
 namespace Agrokultura.UnitTests
 {
-  
     public class CitiesControllerTests
     {
         [Fact]
@@ -50,32 +49,203 @@ namespace Agrokultura.UnitTests
             Assert.Equal(mockCities.Count, model.Count);
         }
 
-     
+        [Fact]
+        public async Task Details_ValidId_ReturnsViewResultWithCity()
+        {
+            // Arrange
+            var mockOptions = new DbContextOptions<AgroContext>();
+            var mockContext = new Mock<AgroContext>(mockOptions);
+            var controller = new CitiesController(mockContext.Object);
+
+            var cityId = 1;
+            var mockCity = new City { Id = cityId, Name = "City 1" };
+
+            var mockDbSet = new Mock<DbSet<City>>();
+            mockDbSet.Setup(m => m.FindAsync(cityId)).ReturnsAsync(mockCity);
+
+            mockContext.Setup(c => c.Cities).Returns(mockDbSet.Object);
+
+            // Act
+            var result = await controller.Details(cityId);
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<City>(viewResult.ViewData.Model);
+            Assert.Equal(mockCity, model);
+        }
+
+        [Fact]
+        public async Task Details_InvalidId_ReturnsNotFound()
+        {
+            // Arrange
+            var mockOptions = new DbContextOptions<AgroContext>();
+            var mockContext = new Mock<AgroContext>(mockOptions);
+            var controller = new CitiesController(mockContext.Object);
+
+            var cityId = 1;
+
+            var mockDbSet = new Mock<DbSet<City>>();
+            mockDbSet.Setup(m => m.FindAsync(cityId)).ReturnsAsync((City)null);
+
+            mockContext.Setup(c => c.Cities).Returns(mockDbSet.Object);
+
+            // Act
+            var result = await controller.Details(cityId);
+
+            // Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public void Create_ReturnsViewResult()
+        {
+            // Arrange
+            var mockOptions = new DbContextOptions<AgroContext>();
+            var mockContext = new Mock<AgroContext>(mockOptions);
+            var controller = new CitiesController(mockContext.Object);
+
+            // Act
+            var result = controller.Create();
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.Null(viewResult.ViewData["CountryId"]);
+        }
+
+        [Fact]
+        public async Task Create_ValidCity_RedirectsToIndex()
+        {
+            // Arrange
+            var mockOptions = new DbContextOptions<AgroContext>();
+            var mockContext = new Mock<AgroContext>(mockOptions);
+            var controller = new CitiesController(mockContext.Object);
+
+            var city = new City { Id = 1, Name = "City 1" };
+
+            // Act
+            var result = await controller.Create(city);
+
+            // Assert
+            var redirectResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal(nameof(CitiesController.Index), redirectResult.ActionName);
+        }
+
+        [Fact]
+        public async Task Edit_ValidId_ReturnsViewResultWithCity()
+        {
+            // Arrange
+            var mockOptions = new DbContextOptions<AgroContext>();
+            var mockContext = new Mock<AgroContext>(mockOptions);
+            var controller = new CitiesController(mockContext.Object);
+
+            var cityId = 1;
+            var mockCity = new City { Id = cityId, Name = "City 1", CountryId = 1 };
+
+            var mockDbSet = new Mock<DbSet<City>>();
+            mockDbSet.Setup(m => m.FindAsync(cityId)).ReturnsAsync(mockCity);
+
+            mockContext.Setup(c => c.Cities).Returns(mockDbSet.Object);
+            mockContext.Setup(c => c.Countries).Returns(Mock.Of<DbSet<Country>>());
+
+            // Act
+            var result = await controller.Edit(cityId);
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<City>(viewResult.ViewData.Model);
+            Assert.Equal(mockCity, model);
+            Assert.NotNull(viewResult.ViewData["CountryId"]);
+        }
+
+        [Fact]
+        public async Task Edit_InvalidId_ReturnsNotFound()
+        {
+            // Arrange
+            var mockOptions = new DbContextOptions<AgroContext>();
+            var mockContext = new Mock<AgroContext>(mockOptions);
+            var controller = new CitiesController(mockContext.Object);
+
+            var cityId = 1;
+
+            var mockDbSet = new Mock<DbSet<City>>();
+            mockDbSet.Setup(m => m.FindAsync(cityId)).ReturnsAsync((City)null);
+
+            mockContext.Setup(c => c.Cities).Returns(mockDbSet.Object);
+
+            // Act
+            var result = await controller.Edit(cityId);
+
+            // Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async Task Delete_ValidId_RedirectsToIndex()
+        {
+            // Arrange
+            var mockOptions = new DbContextOptions<AgroContext>();
+            var mockContext = new Mock<AgroContext>(mockOptions);
+            var controller = new CitiesController(mockContext.Object);
+
+            var cityId = 1;
+            var mockCity = new City { Id = cityId, Name = "City 1" };
+
+            var mockDbSet = new Mock<DbSet<City>>();
+            mockDbSet.Setup(m => m.FindAsync(cityId)).ReturnsAsync(mockCity);
+
+            mockContext.Setup(c => c.Cities).Returns(mockDbSet.Object);
+
+            // Act
+            var result = await controller.DeleteConfirmed(cityId);
+
+            // Assert
+            var redirectResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal(nameof(CitiesController.Index), redirectResult.ActionName);
+        }
+
+        [Fact]
+        public async Task Delete_InvalidId_ReturnsNotFound()
+        {
+            // Arrange
+            var mockOptions = new DbContextOptions<AgroContext>();
+            var mockContext = new Mock<AgroContext>(mockOptions);
+            var controller = new CitiesController(mockContext.Object);
+
+            var cityId = 1;
+
+            var mockDbSet = new Mock<DbSet<City>>();
+            mockDbSet.Setup(m => m.FindAsync(cityId)).ReturnsAsync((City)null);
+
+            mockContext.Setup(c => c.Cities).Returns(mockDbSet.Object);
+
+            // Act
+            var result = await controller.DeleteConfirmed(cityId);
+
+            // Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
     }
 
-
-}
-
-public class TestAsyncEnumerator<T> : IAsyncEnumerator<T>
-{
-    private readonly IEnumerator<T> enumerator;
-
-    public TestAsyncEnumerator(IEnumerator<T> enumerator)
+    public class TestAsyncEnumerator<T> : IAsyncEnumerator<T>
     {
-        this.enumerator = enumerator;
+        private readonly IEnumerator<T> enumerator;
+
+        public TestAsyncEnumerator(IEnumerator<T> enumerator)
+        {
+            this.enumerator = enumerator;
+        }
+
+        public T Current => enumerator.Current;
+
+        public ValueTask<bool> MoveNextAsync()
+        {
+            return new ValueTask<bool>(enumerator.MoveNext());
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            enumerator.Dispose();
+            return new ValueTask();
+        }
     }
-
-    public T Current => enumerator.Current;
-
-    public ValueTask<bool> MoveNextAsync()
-    {
-        return new ValueTask<bool>(enumerator.MoveNext());
-    }
-
-    public ValueTask DisposeAsync()
-    {
-        enumerator.Dispose();
-        return new ValueTask();
-    }
-
 }

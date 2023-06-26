@@ -1,4 +1,5 @@
-﻿@model CombinedViewModel
+﻿@using Microsoft.EntityFrameworkCore;
+@model CombinedViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -22,7 +23,7 @@
             <div class="small-box kartica mb-3"
                  style="background-color: #4c7141; color: #ffffff">
                 <div class="inner">
-                    <div class="h2">@ViewBag.TotalIncome</div>
+                    <div class="h2">@ViewBag.TotalIncome KM</div>
                     <p>Prihodi</p>
                 </div>
                 <i class="fa-regular fa-money-bill-1 fa-2x ikona"
@@ -33,7 +34,7 @@
             <div class="small-box kartica mb-3"
                  style="background-color: #4c7141; color: #ffffff">
                 <div class="inner">
-                    <div class="h2">@ViewBag.TotalExpense</div>
+                    <div class="h2">@ViewBag.TotalExpense KM</div>
                     <p>Troškovi</p>
                 </div>
                 <i class="fa-regular fa-credit-card fa-2x ikona"
@@ -94,7 +95,32 @@
                 @Html.DisplayFor(modelItem => item.Plant.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AmountOfGoods) kg/kom
+                @Html.DisplayFor(modelItem => item.AmountOfGoods)
+                                @{
+                                    var dbContextOptions = new DbContextOptionsBuilder<AgroContext>()
+                                    .UseSqlServer("YourConnectionString") // Replace "YourConnectionString" with the actual connection string
+                                    .Options;
+                                    var dbContext = new AgroContext(dbContextOptions);
+                                    var goodsType = dbContext.GoodsTypes.Find(item.Plant.GoodsTypeId);
+                                }
+                             
+
+
+                                @if (goodsType != null)
+                                {
+                                    if (goodsType.MeasurementUnit == "kg")
+                                    {
+                                        <span>kilogram</span>
+                                    }
+                                    else if (goodsType.MeasurementUnit == "piece")
+                                    {
+                                        <span>komad</span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span>Measurement unit not available</span>
+                                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Customer.FullName)
@@ -181,9 +207,9 @@
             {
                 <tr>
                     <td>@item.ParcelName </td>
-                    <td>@item.TotalIncome €</td>
-                    <td>@item.TotalExpense €</td>
-                    <td>@item.TotalBalance €</td>
+                    <td>@item.TotalIncome KM</td>
+                    <td>@item.TotalExpense KM</td>
+                    <td>@item.TotalBalance KM</td>
                 </tr>
             }
 

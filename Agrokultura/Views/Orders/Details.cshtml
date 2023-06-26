@@ -1,4 +1,5 @@
-﻿@model Agrokultura.Models.Order
+﻿@using Microsoft.EntityFrameworkCore;
+@model Agrokultura.Models.Order
 
 @{
     ViewData["Title"] = "Details";
@@ -21,7 +22,32 @@
             Količina:
         </dt>
         <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.AmountOfGoods) kg/kom
+            @Html.DisplayFor(model => model.AmountOfGoods) 
+                @{
+                    var dbContextOptions = new DbContextOptionsBuilder<AgroContext>()
+                    .UseSqlServer("YourConnectionString") // Replace "YourConnectionString" with the actual connection string
+                    .Options;
+                    var dbContext = new AgroContext(dbContextOptions);
+                    var goodsType = dbContext.GoodsTypes.Find(Model.Plant.GoodsTypeId);
+                }
+              
+
+
+                @if (goodsType != null)
+                {
+                    if (goodsType.MeasurementUnit == "kg")
+                    {
+                        <span>kilogram</span>
+                    }
+                    else if (goodsType.MeasurementUnit == "piece")
+                    {
+                        <span>komad</span>
+                    }
+                }
+                else
+                {
+                    <span>Measurement unit not available</span>
+                }
         </dd>
         <dt class = "col-sm-4">
            Naručitelj:
