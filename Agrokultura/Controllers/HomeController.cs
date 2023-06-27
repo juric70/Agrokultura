@@ -17,7 +17,7 @@ namespace Agrokultura.Controllers
 
         public IActionResult Index()
         {
-            int brojNarudzbi = _context.Orders.Count()-2;
+            int brojNarudzbi = _context.Orders.Count();
             ViewBag.Order = brojNarudzbi;
             int numberOfPeople = _context.People.Count();
             ViewBag.People = numberOfPeople;
