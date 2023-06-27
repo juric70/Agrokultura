@@ -28,14 +28,13 @@ namespace Agrokultura.Controllers
         // GET: Cities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Cities == null)
+            if (id == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            var city = await _context.Cities
-                .Include(c => c.Country)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var city = await _context.Cities.FindAsync(id);
+
             if (city == null)
             {
                 return NotFound();
@@ -44,12 +43,17 @@ namespace Agrokultura.Controllers
             return View(city);
         }
 
+
+
+
+
+
         // GET: Cities/Create
         public IActionResult Create()
         {
             ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name");
             return View();
-        } 
+        }
 
         // POST: Cities/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -127,19 +131,18 @@ namespace Agrokultura.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Cities == null)
-            {
-                return Problem("Entity set 'AgroContext.Cities'  is null.");
-            }
             var city = await _context.Cities.FindAsync(id);
-            if (city != null)
+            if (city == null)
             {
-                _context.Cities.Remove(city);
+                return NotFound();
             }
-            
+
+            _context.Cities.Remove(city);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool CityExists(int id)
         {

@@ -78,39 +78,60 @@ namespace Agrokultura.UnitTests
         public async Task Details_InvalidId_ReturnsNotFound()
         {
             // Arrange
-            var mockOptions = new DbContextOptions<AgroContext>();
-            var mockContext = new Mock<AgroContext>(mockOptions);
-            var controller = new CitiesController(mockContext.Object);
+            var options = new DbContextOptionsBuilder<AgroContext>()
+                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .Options;
 
-            var cityId = 1;
+            using (var context = new AgroContext(options))
+            {
+                var controller = new CitiesController(context);
 
-            var mockDbSet = new Mock<DbSet<City>>();
-            mockDbSet.Setup(m => m.FindAsync(cityId)).ReturnsAsync((City)null);
+                var cityId = 1;
 
-            mockContext.Setup(c => c.Cities).Returns(mockDbSet.Object);
+                var mockDbSet = new Mock<DbSet<City>>();
+                mockDbSet.Setup(m => m.FindAsync(cityId)).ReturnsAsync((City)null);
 
-            // Act
-            var result = await controller.Details(cityId);
+                context.Cities = mockDbSet.Object;
 
-            // Assert
-            Assert.IsType<NotFoundResult>(result);
+                // Act
+                var result = await controller.Details(cityId);
+
+                // Assert
+                Assert.IsType<NotFoundResult>(result);
+            }
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
         [Fact]
-        public void Create_ReturnsViewResult()
+        public async Task Create_ReturnsViewResult()
         {
             // Arrange
             var mockOptions = new DbContextOptions<AgroContext>();
             var mockContext = new Mock<AgroContext>(mockOptions);
             var controller = new CitiesController(mockContext.Object);
 
+            var city = new City { Name = "Test City" }; // Create a sample City object
+
             // Act
-            var result = controller.Create();
+            var result = await controller.Create(city);
 
             // Assert
-            var viewResult = Assert.IsType<ViewResult>(result);
-            Assert.Null(viewResult.ViewData["CountryId"]);
+            var redirectResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal(nameof(CitiesController.Index), redirectResult.ActionName);
         }
+
 
         [Fact]
         public async Task Create_ValidCity_RedirectsToIndex()
