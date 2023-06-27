@@ -11727,11 +11727,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Zvonko\\source\\Agrokultura\\Agrokultura\\Agrokultura.csproj",
+      "projectUniqueName": "C:\\Users\\Zvonko\\source\\repos\\Agrokultura\\Agrokultura\\Agrokultura.csproj",
       "projectName": "Agrokultura",
-      "projectPath": "C:\\Users\\Zvonko\\source\\Agrokultura\\Agrokultura\\Agrokultura.csproj",
+      "projectPath": "C:\\Users\\Zvonko\\source\\repos\\Agrokultura\\Agrokultura\\Agrokultura.csproj",
       "packagesPath": "C:\\Users\\Zvonko\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Zvonko\\source\\Agrokultura\\Agrokultura\\obj\\",
+      "outputPath": "C:\\Users\\Zvonko\\source\\repos\\Agrokultura\\Agrokultura\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Zvonko\\AppData\\Roaming\\NuGet\\NuGet.Config",

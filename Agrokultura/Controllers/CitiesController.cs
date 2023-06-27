@@ -28,13 +28,14 @@ namespace Agrokultura.Controllers
         // GET: Cities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Cities == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            var city = await _context.Cities.FindAsync(id);
-
+            var city = await _context.Cities
+                .Include(c => c.Country)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (city == null)
             {
                 return NotFound();
@@ -43,8 +44,7 @@ namespace Agrokultura.Controllers
             return View(city);
         }
 
-
-
+        //
 
 
 

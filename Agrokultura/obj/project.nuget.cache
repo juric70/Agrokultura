@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gm4DMelt5r+Gw8ciXSiclEIwjtcBdfFydpyh887Kj0tJV6572BP0+wuBlPsz7HNu2zwTS8TnrA/5Dds18fGkUw==",
+  "dgSpecHash": "T56QhjUIqWrvJNoPc8PFyemNSxq4cLgCU35g7Ou2bFdDARgA3cUygZogpqrKWc4hCf7pohOGnS0aI2OAMxNyDA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Zvonko\\source\\Agrokultura\\Agrokultura\\Agrokultura.csproj",
+  "projectFilePath": "C:\\Users\\Zvonko\\source\\repos\\Agrokultura\\Agrokultura\\Agrokultura.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Zvonko\\.nuget\\packages\\aspose.pdf\\23.6.0\\aspose.pdf.23.6.0.nupkg.sha512",
     "C:\\Users\\Zvonko\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",

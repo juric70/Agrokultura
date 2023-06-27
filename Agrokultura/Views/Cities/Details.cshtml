@@ -9,36 +9,38 @@
         <h1>Detalji grada</h1>
 
         <dl class="row form-group-update_create">
-        <dt class = "col-sm-4">
-            Naziv
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-4">
-            Poštanski broj
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.PostalCode)
-        </dd>
-        <dt class = "col-sm-4">
-            Država
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.Country.Name)
-               <a asp-controller="Countries" asp-action="Details" asp-route-id="@Model.Country.Id" class="icons-modify-in-details"><i class="fa-solid fa-circle-info"></i></a>
+            <dt class="col-sm-4">
+                Naziv
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-4">
+                Poštanski broj
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.PostalCode)
+            </dd>
+            <dt class="col-sm-4">
+                Država
+            </dt>
+            <dd class="col-sm-8">
+                @if (Model.Country != null)
+                {
+                    @Html.DisplayFor(model => model.Country.Name)
+                }
+                else
+                {
+                        <span>Nepoznato</span>
+                }
+            </dd>
+        </dl>
+        <div class="btn edit-data-btn">
+            <a asp-action="Edit" asp-route-id="@Model?.Id">Uredi</a>
+        </div>
 
-        </dd>
-    </dl>
-    <div class="btn edit-data-btn">
-        <a asp-action="Edit" asp-route-id="@Model?.Id">Uredi</a>
-    </div>
-
-
-    <div class="btn back-to-list">
-        <a href="javascript:history.back()">Natrag</a>
+        <div class="btn back-to-list">
+            <a href="javascript:history.back()">Natrag</a>
+        </div>
     </div>
 </div>
-
-</div>
-
