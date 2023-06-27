@@ -28,14 +28,13 @@ namespace Agrokultura.Controllers
         // GET: Cities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Cities == null)
+            if (id == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            var city = await _context.Cities
-                .Include(c => c.Country)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var city = await _context.Cities.FindAsync(id);
+
             if (city == null)
             {
                 return NotFound();
@@ -44,7 +43,8 @@ namespace Agrokultura.Controllers
             return View(city);
         }
 
-        //
+
+
 
 
 
@@ -59,14 +59,14 @@ namespace Agrokultura.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-       
-        public async Task<IActionResult> Create (City city)
+
+        public async Task<IActionResult> Create(City city)
         {
-            
-                _context.Add(city);
-                 _context.SaveChanges();
+
+            _context.Add(city);
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
-          
+
         }
 
         // GET: Cities/Edit/5
@@ -105,7 +105,7 @@ namespace Agrokultura.Controllers
             }
         }
 
-        
+
 
         // GET: Cities/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -146,7 +146,7 @@ namespace Agrokultura.Controllers
 
         private bool CityExists(int id)
         {
-          return (_context.Cities?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Cities?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
         internal Task Details(object id)
@@ -155,3 +155,7 @@ namespace Agrokultura.Controllers
         }
     }
 }
+
+
+
+
