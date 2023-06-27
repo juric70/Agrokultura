@@ -46,6 +46,8 @@ namespace Agrokultura.Controllers
         // GET: PlantPassports/Create
         public IActionResult Create()
         {
+            var plants = _context.Plants.ToList(); 
+            ViewBag.Plants = new SelectList(plants, "Name", "Name");
             var countries = _context.Countries.ToList();
             ViewBag.Countries = new SelectList(countries, "Name", "Name");
             return View();
@@ -80,7 +82,8 @@ namespace Agrokultura.Controllers
             {
                 return NotFound();
             }
-
+            var plants = _context.Plants.ToList();
+            ViewBag.Plants = new SelectList(plants, "Name", "Name");
             var countries = await _context.Countries.ToListAsync();
             ViewBag.Countries = new SelectList(countries, "Name", "Name", plantPassport.CountryOfOrigin);
 
